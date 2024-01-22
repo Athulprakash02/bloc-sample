@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(scaffoldBackgroundColor: Colors.grey),
         debugShowCheckedModeBanner: false,
-        home: const QuoteScreen(),
+        home:  QuoteScreen(),
       ),
     );
   }

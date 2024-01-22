@@ -6,6 +6,11 @@ part 'quote_state.dart';
 
 class QuoteBloc extends Bloc<QuoteEvent, QuoteState> {
   QuoteBloc() : super(QuoteInitial()) {
+    on<FavouriteQuoteEvent>((event, emit) {
+      bool isFav = event.isFavoured;
+
+      emit(QuoteFavouritedState(isFav: !isFav));
+    });
     on<QuoteRequestEvent>((event, emit) async {
       emit(QuoteLoadingState());
 

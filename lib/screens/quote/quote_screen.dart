@@ -4,9 +4,10 @@ import 'package:quote/screens/quote/bloc/quote_bloc.dart';
 import 'package:quote/screens/quote/widgets/custom_button.dart';
 import 'package:quote/screens/quote/widgets/quote_widget.dart';
 
+// ignore: must_be_immutable
 class QuoteScreen extends StatelessWidget {
-  const QuoteScreen({super.key});
-
+  QuoteScreen({super.key});
+  bool isFav = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,22 @@ class QuoteScreen extends StatelessWidget {
                   },
                 ),
               )),
-              const CustomButton(text: 'Generate')
+              const CustomButton(text: 'Generate'),
+              IconButton(onPressed: () {
+                BlocProvider.of<QuoteBloc>(context)
+                    .add(FavouriteQuoteEvent(isFavoured: isFav));
+              }, icon: BlocBuilder<QuoteBloc, QuoteState>(
+                builder: (context, state) {
+                  if (state is QuoteFavouritedState) {
+                    isFav = state.isFav;
+                    return state.isFav
+                        ? const Icon(Icons.favorite)
+                        : const Icon(Icons.favorite_border);
+                  } else {
+                    return const Icon(Icons.favorite_border);
+                  }
+                },
+              ))
             ],
           ),
         ),

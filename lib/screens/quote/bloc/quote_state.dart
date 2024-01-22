@@ -16,3 +16,10 @@ class QuoteLoadedState extends QuoteState {
 
 }
 
+class QuoteFavouritedState extends QuoteState {
+  final bool isFav;
+
+  QuoteFavouritedState({required this.isFav});
+  
+}
+
